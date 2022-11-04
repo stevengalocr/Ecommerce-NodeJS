@@ -1,0 +1,135 @@
+<!-- Start of Reparaciones -->
+<div role="tabpanel" class="tab-pane fade active in">
+    <div class="col-md-12 col-xs-12">
+        <div class="table_block table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="col-md-2">Fecha</th>
+                        <th class="col-md-3">Nombre completo</th>
+                        <th class="col-md-2">Dispositivo</th>
+                        <th class="col-md-3">Estado del ticket</th>
+                        <th class="col-md-2">Detalles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (role==='USER' ){ %>
+                        <% if (reparaciones !=null){ for(var Reparacion of reparaciones) { %>
+                            <tr>
+                                <td>
+                                    <div class="product-name">
+                                        <h4 style="font-weight: normal">
+                                            <%= Reparacion.fechaCreacion %>
+                                        </h4>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="product-name">
+                                        <h3 style="font-weight: normal">
+                                            <%= Reparacion.nombreCliente %>
+                                        </h3>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="product-name">
+                                        <h4 style="font-weight: normal">
+                                            <%= Reparacion.dispositivo %>
+                                        </h4>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="product-name">
+                                        <h4 class="text-blue">
+                                            <i><%= Reparacion.estado %></i>
+                                        </h4>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="product-name">
+                                        <a href="Detalles-Reparaciones/<%= Reparacion._id %>" type="button">
+                                            <i><h5>Visualizar</h5></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                    <% }} %>
+                        <% } else if (role==='ADMIN' ) { %>
+                                <% if (reparaciones !=null){ for(var Reparacion of reparaciones) { %>
+                                    <tr>
+                                        <td>
+                                            <div class="product-name">
+                                                <h4 style="font-weight: normal">
+                                                    <%= Reparacion.fechaCreacion %>
+                                                </h4>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="product-name">
+                                                <h4 style="font-weight: normal">
+                                                    <%= Reparacion.nombreCliente %>
+                                                </h4>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="product-name">
+                                                <h4 style="font-weight: normal">
+                                                    <%= Reparacion.dispositivo %>
+                                                </h4>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="product-name">
+                                                <h4 class="text-blue">
+                                                    <i><%= Reparacion.estado %></i>
+                                                </h4>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="product-name">
+                                                <a href="Detalles-Reparaciones/<%= Reparacion._id %>" type="button">
+                                                    <i><h5>Visualizar</h5></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                    <% }}} %>
+                </tbody>
+            </table>
+        </div>
+
+            <!-- Start of Paginación -->
+            <div class="col-md-12 text-center">
+                <% if (paginas > 1) { %>
+                    <ul class="pagination text-center">
+                        <% if (current == 1) { %>
+                            <li class="disabled"><a>Primero</a></li>
+                        <% } else { %>
+                            <li><a href="/PerfilReparaciones/1">Primero</a></li>
+                        <% } %>
+                        <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                        <% if (i !== 1) { %>
+                            <li class="disabled"><a>...</a></li>
+                        <% } %>
+                        <% for (; i <= (Number(current) + 4) && i <= paginas; i++) { %>
+                            <% if (i == current) { %>
+                                <li class="active"><a><%= i %></a></li>
+                            <% } else { %>
+                                <li><a href="/PerfilReparaciones/<%= i %>"><%= i %></a></li>
+                            <% } %>
+                            <% if (i == Number(current) + 4 && i < paginas) { %>
+                                <li class="disabled"><a>...</a></li>
+                            <% } %>
+                        <% } %>
+                        <% if (current == paginas) { %>
+                            <li class="disabled"><a>Último</a></li>
+                        <% } else { %>
+                            <li><a href="/PerfilReparaciones/<%= paginas %>">Último</a></li>
+                        <% } %>
+                    </ul>
+                <% } %>
+            </div>
+            <!-- End of Paginación -->
+            
+    </div>
+</div>
+<!-- End of Reparaciones -->

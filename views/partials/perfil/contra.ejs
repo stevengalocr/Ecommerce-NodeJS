@@ -1,0 +1,30 @@
+<!-- Start of Contraseña -->
+<div role="tabpanel" class="tab-pane fade active in">
+    <div class="col-md-12 tabpanel-col">
+        <form action="/Perfil/:pass/:nuevaPass/:confirmNuevaPass" method="post">
+            <div class="row">
+                <p>Por razones de seguridad, debe ingresar su contraseña actual antes de establecer una nueva.</p>
+                <div class="col-md-4">
+                    <h4>Contraseña actual</h4>
+                    <input class="form-control input-box mb20" type="password" name="pass" placeholder="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Nueva contraseña</h4>
+                    <input class="form-control input-box mb20" type="password" name="nuevaPass" placeholder="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Confirmar nueva contraseña</h4>
+                    <input class="form-control input-box mb20" type="password" name="confirmNuevaPass" placeholder="">
+                </div>
+            </div>
+            <div class="pt10">
+                <button class="btn btn-border btn-blue btn-dark nomargin">Guardar contraseña</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- End of Contraseña -->

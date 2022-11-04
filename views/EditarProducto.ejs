@@ -1,0 +1,77 @@
+<%- include('./partials/header') %>
+
+
+    <!-- ===== Start of Page Title ===== -->
+    <section class="page-title ptb50 overlay-black">
+        <div class="container">
+            <h2 class="uppercase">Productos</h2>
+            <div class="breadcrumbs pt10">
+                <h5><a href="ProductoAdmin/1">Productos</a> / Modificar Productos</h5>
+            </div>
+        </div>
+    </section>
+    <!-- ===== End of Page Title ===== -->
+
+
+
+    <!-- ===== Start of Main Section ===== -->
+    <section class="contact-page ptb20">
+        <div class="container">
+
+
+            <!-- ===== Start of Contact Form ===== -->
+            <div class="col-md-8 col-md-offset-2 pt60">
+                <h3 class="uppercase text-center">Modificar Producto Existente</h3>
+
+                <div class="row contact-form pt40">
+                    <!-- start of form -->
+                    <form action="/Producto/edit/<%= productos._id %>" method="post" enctype="multipart/form-data">
+                        <h4 class="text-center">Modificar Producto</h4><br>
+                        <input class="form-control input-box" type="text" name="nombreProducto"
+                            placeholder="Nombre del Producto" value="<%= productos.nombreProducto %>" required><br>
+                        <textarea class="form-control textarea-box" type="" rows="6" name="descripcion"
+                            placeholder="Descripción del producto" required><%= productos.descripcion %></textarea><br>
+
+                        <div class="col-md-8" style="padding: 0 10px 0 0;">
+                            <input class="form-control input-box mb20" type="text" name="precio"
+                                placeholder="Precio del Producto" value="<%= productos.precio %>" required>
+                        </div>
+    
+                        <div class="col-md-4" style="padding: 0 0 0 10px;">
+                            <input class="form-control input-box mb20" type="number" name="descuento"
+                                placeholder="Descuento" min="0" max="100" value="<%= productos.descuento %>" required>
+                        </div>
+
+                        <select name="categoria" id="categoria" class="form-control">
+                            <option selected hidden><%= productos.categoria %></option>
+                            <option >Alarmas contra robo</option>
+                            <option >Camaras de vigilancia</option>
+                            <option >Casa Inteligente</option>
+                            <option >Cerca electronicas</option>
+                            <option >Incendio</option>
+                            <option >Kits</option>
+                            <option >Impresoras</option>
+                            <option >Monitores y pantallas</option>
+                            <option >PCs y Laptops</option>
+                            <option >Punto de venta</option>
+                            <option >Redes</option>
+                            <option >Otros productos</option>
+                        </select><br>
+                        <label for="myfile">Seleccionar Imagen:</label> <input type="file" id="imagen" name="imagen"
+                            value="<%= productos.imagen %>">
+                        </br>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-border btn-blue btn-dark" type="submit">Guardar</button>
+                    </div>
+                    </form>
+                    <!-- end of form -->
+                </div>
+            </div>
+            <!-- ===== End of Contact Form ===== -->
+        </div>
+    </section>
+    <!-- ===== End of Main Section ===== -->
+
+
+    <%- include('./partials/footer') %>

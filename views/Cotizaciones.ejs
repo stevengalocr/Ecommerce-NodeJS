@@ -1,0 +1,60 @@
+<%- include('./partials/header') %>
+
+
+    <!-- ===== Start of Page Title ===== -->
+    <section class="page-title ptb50 overlay-black">
+        <div class="container">
+            <h2 class="uppercase">Apartado de instalaciones</h2>
+            <div class="breadcrumbs pt10">
+                <h5><a href="index">Inicio</a> / Instalaciones</h5>
+            </div>
+        </div>
+    </section>
+    <!-- ===== End of Page Title ===== -->
+
+    
+    <!-- ===== Start of Main Section ===== -->
+    <section class="contact-page ptb80 ptb60">
+        <div class="container">
+            <!-- ===== Start of Contact Form ===== -->
+            <div class="col-md-8 col-md-offset-2 pt60">
+                <h3 class="uppercase text-center">Ticket para solicitar instalación</h3>
+
+                <div class="row contact-form pt40">
+                    <!-- start of form -->
+                    <form action="/Cotizaciones/Crear" method="POST">
+
+                        <!-- contact result -->
+                        <div id="contact-result"></div>
+                        <!-- end of contact result -->
+
+                        <div class="col-md-12">
+                            <input class="form-control input-box mb20" type="text" name="nombreCliente" placeholder="Nombre completo" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input class="form-control input-box mb20" type="email" name="correo" placeholder="Correo electrónico" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input class="form-control input-box mb20" type="text" name="telefono" placeholder="Telefono" required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <input class="form-control input-box" type="text" name="productos" placeholder="Productos" required>
+
+                            <textarea class="form-control textarea-box mtb20" rows="8" name="descripcion" placeholder="Descripción de la instalación" required></textarea>
+
+                            <input class="form-control input-box" type="text" name="ubicacion" placeholder="Ubicación" required> </br>
+                            
+                        </div>
+                            <button class="btn btn-border btn-blue" type="submit">Enviar solicitud</button>
+                    </form>
+                    <!-- end of form -->
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- ===== End of Main Section ===== -->
+
+
+    <%- include('./partials/footer') %>

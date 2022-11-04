@@ -1,0 +1,44 @@
+<%- include('./partials/header') %>
+
+
+    <!-- ===== Start of Page Title ===== -->
+    <section class="page-title ptb50 overlay-black">
+        <div class="container">
+            <h2 class="uppercase">Bitacora</h2>
+            <div class="breadcrumbs pt10">
+                <h5><a href="BitacoraEditar/<%= bitacora._id %>/1">Bitacora</a> / Modificar Mantenimiento</h5>
+            </div>
+        </div>
+    </section>
+    <!-- ===== End of Page Title ===== -->
+
+    <!-- ===== Start of Main Section ===== -->
+    <section class="domain-page ptb80">
+        <div class="container">
+
+            <!-- ===== Start of domain sidebar ===== -->
+            <aside class="col-md-8" style="margin-left: 15%;">
+                <div class="domain-sidebar">
+                    <!-- Start of formulary -->
+                <div class="text-center">
+                    <% for(var Mantenimiento of bitacora.mantenimientos) {%>
+                    <form action="/Mantenimiento/edit/<%= bitacora.id %>/<%= Mantenimiento._id %>" method="post">
+                        <h4 class="text-center">Modificar bitácora</h4><br>
+                        <input class="form-control input-box" type="date" name="fechaMantenimiento" placeholder="Fecha Mantenimiento"
+                            value="<%= Mantenimiento.fechaMantenimiento %>" required><br>
+                        <input class="form-control input-box" type="text" name="responsableMantenimiento"
+                            placeholder="Responsable" value="<%= Mantenimiento.responsableMantenimiento %>" required><br>
+                        <textarea class="form-control input-box" type="" name="comentarios" placeholder="Comentarios" rows="6" required><%= Mantenimiento.comentarios %></textarea><br>
+                        <button class="btn btn-border btn-blue btn-dark" type="submit">Guardar</button>
+                    </form>
+                    <% } %>
+                </div>
+                </div>
+                <!-- End of formulary -->
+            </aside>
+            <!-- ===== End of domain sidebar ===== -->
+    </section>
+    <!-- ===== End of Main Section ===== -->
+
+    
+    <%- include('./partials/footer') %>

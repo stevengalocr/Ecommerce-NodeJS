@@ -1,0 +1,183 @@
+<%- include('./partials/header') %>
+
+    <!-- ===== Start of Page Title ===== -->
+    <section class="page-title ptb50 overlay-black">
+        <div class="container">
+            <h2 class="uppercase">Productos</h2>
+            <div class="breadcrumbs pt10">
+                <h5><a href="index">Inicio</a> / Productos</h5>
+            </div>
+        </div>
+    </section>
+    <!-- ===== End of Page Title ===== -->
+
+    <!-- ===== Start of Domain Section ===== -->
+    <section class="domain ptb30">
+        <div class="container">
+            <div class="col-md-2">
+                <h2 class="capitalize">Busque su <span class="text-blue">Producto</span></h2>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <!-- Start of Domain Search -->
+                    <div class="form-group">
+                        <form action="/Search" method="get">
+                            <div class="form-group">
+                                <input type="search" id="buscar" name="buscar" class="form-control"
+                                    placeholder="Buscar producto" style="width: 50%;">
+
+                                <select name="filtro" id="filtro" class="form-control btn-lg"
+                                    style="width: fit-content; padding: 0px; height: 45px; margin-left: 1%;">
+                                    <option selected hidden>Seleccione una categoria...</option>
+                                    <option>Alarmas contra robo</option>
+                                    <option>Camaras de vigilancia</option>
+                                    <option>Casa Inteligente</option>
+                                    <option>Cerca electronicas</option>
+                                    <option>Incendio</option>
+                                    <option>Kits</option>
+                                    <option>Impresoras</option>
+                                    <option>Monitores y pantallas</option>
+                                    <option>PCs y Laptops</option>
+                                    <option>Punto de venta</option>
+                                    <option>Redes</option>
+                                    <option>Otros productos</option>
+                                </select>
+                                <button type="submit" class="btn btn-border btn-blue btn-dark">Buscar</button>
+                            </div>
+
+                        </form>
+                    </div>
+                    <!-- End of Domain Search -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ===== End of Domain Section ===== -->
+
+    <!-- ===== Start of Main Section ===== -->
+    <section class="portfolio pt80 pb40">
+        <%- include('./partials/flash') %>
+            <div class="container nopadding">
+                <!-- Start of Portfolio Grid -->
+                <div class="pt60">
+
+                    <% for(var i=0 ; i < productos.length; i++) { %>
+
+                        <form action="/Productos/add" method="POST">
+                            <div class="col-md-4 col-sm-4 col-xs-12" style="margin-bottom: 20px">
+                                <div class="member">
+                                    <input class="form-control input-box mb20" type="hidden" name="id"
+                                        value="<%= productos[i]._id %>">
+                                    <div class="member-details" data-toggle="modal" data-target="#Modal-<%= productos[i]._id %>">
+                                        <img src="images/productos/<%= productos[i].imagen %>" class="img-responsive"
+                                            alt="<%= productos[i].nombreProducto %>" style="cursor:pointer;">
+                                    </div>
+                                    <div>
+                                        <h4>
+                                            <%= productos[i].nombreProducto %>
+                                        </h4>
+                                        <p>
+                                            <%   let precios = parseFloat(productos[i].precio) %>
+                                            <%   let commas = precios.toLocaleString('en-US', {maximumFractionDigits:2}) %>
+                                            <% if(productos[i].descuento === 0){ %>
+                                                ₡<%= commas %>
+                                            <% } else { %>
+                                                <s style="color: red;">₡<%= commas %></s>
+                                                <%   let precioDescuento = (productos[i].precio - (productos[i].precio * productos[i].descuento /100 )) %>
+                                                <%   let precioNuevo = parseFloat(precioDescuento) %>
+                                                <%   let precioDecimales = precioNuevo.toLocaleString('en-US', {maximumFractionDigits:2}) %>
+                                                <span style="padding-left: 5px;">₡<%= precioDecimales %></span>
+                                            <% } %>
+                                        </p>
+                                        <p>
+                                            <button type="submit" class="btn btn-border btn-blue btn-dark">Agregar al
+                                                carrito</button>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </form> 
+                        
+                        <!-- Start of Modal -->
+
+                        <div class="modal" id="Modal-<%= productos[i]._id %>" tabindex="-1" role="dialog">
+                            <div class="modal-dialog modal-lg" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h2 class="modal-title"><%= productos[i].nombreProducto %></h2>
+                                </div>
+                                <div class="modal-body row">
+                                    <div class="col-md-6 col-sm-3">
+                                        <img src="images/productos/<%= productos[i].imagen %>" class="img-responsive"
+                                        alt="">
+                                    </div>
+                                    <div class="col-md-6 col-sm-3">
+                                        <h4>Precio: </h4>
+                                        <p>
+                                            
+                                            
+                                            <% if(productos[i].descuento === 0){ %>
+                                                ₡<%= commas %>
+                                            <% } else { %>
+                                                <s style="color: red;">₡<%= commas %></s>
+                                                <%   precioDescuento = (productos[i].precio - (productos[i].precio * productos[i].descuento /100 )) %>
+                                                <%   precioNuevo = parseFloat(precioDescuento) %>
+                                                <%   precioDecimales = precioNuevo.toLocaleString('en-US', {maximumFractionDigits:2}) %>
+                                                <span style="padding-left: 5px;">₡<%= precioDecimales %></span>
+                                            <% } %>
+                                        </p>
+                                        <br>
+                                        <h4>Descripción: </h4>
+                                        <div style="white-space: pre-wrap;"><%= productos[i].descripcion %></div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-border btn-blue" data-dismiss="modal">Regresar</button>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+
+                          <!-- End of Modal -->
+
+                    <% } %>
+
+        <!-- Start of Paginación -->
+        <div class="col-md-12 text-center">
+            <% if (paginas > 1) { %>
+                <ul class="pagination text-center">
+                    <% if (current == 1) { %>
+                        <li class="disabled"><a>Primero</a></li>
+                    <% } else { %>
+                        <li><a href="/Productos/1">Primero</a></li>
+                    <% } %>
+                    <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                    <% if (i !== 1) { %>
+                        <li class="disabled"><a>...</a></li>
+                    <% } %>
+                    <% for (; i <= (Number(current) + 4) && i <= paginas; i++) { %>
+                        <% if (i == current) { %>
+                            <li class="active"><a><%= i %></a></li>
+                        <% } else { %>
+                            <li><a href="/Productos/<%= i %>"><%= i %></a></li>
+                        <% } %>
+                        <% if (i == Number(current) + 4 && i < paginas) { %>
+                            <li class="disabled"><a>...</a></li>
+                        <% } %>
+                    <% } %>
+                    <% if (current == paginas) { %>
+                        <li class="disabled"><a>Último</a></li>
+                    <% } else { %>
+                        <li><a href="/Productos/<%= paginas %>">Último</a></li>
+                    <% } %>
+                </ul>
+            <% } %>
+        </div>
+    <!-- End of Paginación -->
+
+                    </div>
+                </div>
+            </section>
+            <!-- ===== End of Team ===== -->
+
+    <%- include('./partials/footer') %>

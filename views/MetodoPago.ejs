@@ -1,0 +1,83 @@
+<%- include('./partials/header') %>
+
+     <!-- ===== Main Section ===== -->
+    <section class="pago-page fullscreen overlay-blue">
+
+            <!-- Main Content -->
+            <div class="login-box">
+
+                <%- include('./partials/flash') %>
+
+                <!-- Start of Pago Form -->
+               <form action="/Pago" method="POST" id="login-form">
+                 <div class="text-center">
+                       <h3 class="uppercase">Método De Pago</h3>
+                 </div>
+                 <br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="Pago" id="Efectivo" value="Efectivo" required>
+                    <label class="form-check-label" for="inlineRadio1">Efectivo</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="Pago" id="SINPE" value="Sinpe Móvil" required>
+                    <label class="form-check-label" for="inlineRadio2">Sinpe Móvil</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="Pago" id="Transferencia" value="Transferencia bancaria." required>
+                    <label class="form-check-label" for="inlineRadio3">Transferencia bancaria</label>
+                </div>
+                <br>
+                <br>
+
+                <div class="text-center">
+                    <h3 class="uppercase">Método de Contacto</h3>
+              </div>
+              <br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="MetodoContacto" id="Whatsapp" value="WhatsApp-Llamada" required>
+                    <label class="form-check-label" for="inlineRadio2">WhatsApp-Llamada</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="MetodoContacto" id="Correo" value="Correo electrónico" required>
+                    <label class="form-check-label" for="inlineRadio3">Correo electrónico</label>
+                </div>
+
+                    <input type="text" id="Contacto" name="Contacto" class="form-control mt15" placeholder="Contacto:" required>
+
+                    <div class="mt15 text-center">
+                        <button class="btn btn-border btn-blue btn-dark">Terminar compra</button>
+                        <br>
+                        <a class="text-center" href="Pedidos/1">Regresar</a>
+                    </div>
+                    <br>
+                   
+                </form>
+                <!-- End of Pago Form -->
+
+            </div>
+            <!-- End of Main Content -->
+        </section>
+        <!-- ===== End of Main Section =====  -->
+
+
+    <!-- ===== All Javascript at the bottom of the page for faster page loading ===== -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/simple-expand.min.js"></script>
+    <script src="js/jquery.countTo.js"></script>
+    <script src="js/jquery.inview.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/jquery.nav.js"></script>
+    <script src="js/jquery.ajaxchimp.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.easypiechart.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/custom.js"></script>
+
+</body>
+
+</html>

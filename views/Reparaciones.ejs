@@ -1,0 +1,60 @@
+<%- include('./partials/header') %>
+
+
+    <!-- ===== Start of Page Title ===== -->
+    <section class="page-title ptb50 overlay-black">
+        <div class="container">
+            <h2 class="uppercase">Apartado de repaciones</h2>
+            <div class="breadcrumbs pt10">
+                <h5><a href="index">Inicio</a> / Repaciones</h5>
+            </div>
+        </div>
+    </section>
+    <!-- ===== End of Page Title ===== -->
+
+    <!-- ===== Start of Main Section ===== -->
+    <section class="contact-page ptb40">
+
+        <%- include('./partials/flash') %>
+
+        <div class="container">
+            <!-- ===== Start of Contact Form ===== -->
+            <div class="col-md-8 col-md-offset-2 pt60">
+                <h3 class="uppercase text-center">Ticket para solicitar reparación</h3>
+
+                <div class="row contact-form pt40">
+                    <!-- start of form -->
+                    <form action="/Reparaciones/add" method="POST" enctype="multipart/form-data">
+
+                        <div class="col-md-12">
+                            <input class="form-control input-box mb20" type="text" name="nombreCliente" placeholder="Nombre completo" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input class="form-control input-box mb20" type="email" name="correo" placeholder="Correo electrónico" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input class="form-control input-box mb20" type="text" name="telefono" placeholder="Telefono" required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <input class="form-control input-box" type="text" name="dispositivo" placeholder="Dispositivo (Marca y modelo)" required>
+                            <textarea class="form-control textarea-box mtb20" rows="8" name="descripcion" placeholder="Explicación de los daños y modelo" required></textarea>
+                            <div class="text-center">
+                                <label for="ImagenDispositivo" >Seleccionar Imagen:</label> 
+                                <input type="file" id="Imagen" name="Imagen">
+                                <br>
+                            </div>
+                        </div>
+                        <button class="btn btn-border btn-blue" type="submit">Enviar solicitud</button>
+                    </form>
+                </div>
+                    <!-- end of form -->
+                
+            </div>
+        </div>
+
+    </section>
+    <!-- ===== End of Main Section ===== -->
+
+
+    <%- include('./partials/footer') %>

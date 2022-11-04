@@ -1,0 +1,202 @@
+<%- include('./partials/header') %>
+
+
+    <hr>
+    <section class="services-page3 ptb80">
+        <%- include('./partials/flash') %>
+            <div class="container">
+                <!-- Start of Row -->
+                <div class="row">
+                    <!-- Start of Tab Content Wrapper -->
+                    <div class="row tab-content custom-tabs">
+
+                        <!-- Start of Tab 1 Content -->
+                        <div role="tabpanel" class="tab-pane fade active in" id="tab">
+
+                            <!-- Tabpanel Column -->
+
+                            <div class="col-md-12 tabpanel-col">
+                                <% for(var Reparacion of reparacion) {%>
+                                    <form action="/Reparaciones/edit/<%= Reparacion._id %>" method="post">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <h2>Nombre completo:</h2>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h3 style="font-weight:normal">
+                                                    <%= Reparacion.nombreCliente%>
+                                                </h3>
+                                            </div>
+                                        </div>
+
+                                        <br>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <h2>Teléfono:</h2>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h3 style="font-weight:normal">
+                                                    <%= Reparacion.telefono%>
+                                                </h3>
+                                            </div>
+                                        </div>
+
+                                        <br>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <h2>Fecha:</h2>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h3 style="font-weight:normal">
+                                                    <%= Reparacion.fechaCreacion%>
+                                                </h3>
+                                            </div>
+                                        </div>
+
+                                        <br>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <h2>Correo:</h2>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h3 style="font-weight:normal">
+                                                    <%= Reparacion.correo%>
+                                                </h3>
+                                            </div>
+                                        </div>
+
+                                        <br>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <h2>Dispositivo:</h2>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h3 style="font-weight:normal">
+                                                    <%= Reparacion.dispositivo%>
+                                                </h3>
+                                            </div>
+                                        </div>
+
+                                        <br>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <h2>Descripción:</h2>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h3 style="font-weight:normal">
+                                                    <%= Reparacion.descripcion%>
+                                                </h3>
+                                            </div>
+                                        </div>
+
+                                        <br>
+
+                                        <% if (role==='ADMIN' ){ %>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <h2>Estado del ticket:</h2>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <select name="estado" id="estado" class="form-control">
+                                                        <option selected hidden>
+                                                            <%= Reparacion.estado%>
+                                                        </option>
+                                                        <option>En progreso</option>
+                                                        <option>Completado</option>
+                                                        <option>Cancelado</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <% } else if (role==='USER' ) { %>
+                                                <% if (Reparacion.estado==='En progreso' ){ %>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <h2>Estado del ticket:</h2>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <select name="estado" id="estado" class="form-control">
+                                                                <option>
+                                                                    <%= Reparacion.estado%>
+                                                                </option>
+                                                                <option>Cancelado</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <% } else if (Reparacion.estado==='Cancelado' ||
+                                                        Reparacion.estado==='Completado' ) { %>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <h2>Estado del ticket:</h2>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <h3 style="font-weight:normal" name="estado">
+                                                                    <%= Reparacion.estado%>
+                                                                </h3>
+                                                            </div>
+                                                        </div>
+                                                        <% }} %>
+                                                            <br>
+
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <h2>Imagen del dispositivo:</h2><br>
+                                                                    <img src="images/reparaciones/<%=Reparacion.imagen%>"
+                                                                        alt="Imagen subida del usuario"
+                                                                        style="width: 90%; height: 90%;">
+                                                                </div>
+                                                            </div>
+                                                            <br>
+
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                            <a type="button" data-toggle="modal" data-target="#Actualizar" class="btn btn-border btn-dark nomargin">Actualizar</a>
+                                    
+                                    <a href="/PerfilReparaciones/1"
+                                        class="btn btn-border btn-blue btn-blue nomargin">Regresar</a>
+                            </div>
+                        </div>
+
+                        <% } %>
+                    </div>
+
+                    <!-- Start of Modal -->
+
+                    <div class="modal" id="Actualizar" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2 class="modal-title text-center">Actualizar</h2>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <p>¿Desea actualizar el estado del ticket?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="submit" class="btn btn-border btn-blue btn-dark nomargin" value="Actualizar" />
+                                    <button type="button" class="btn btn-border btn-blue"
+                                        data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                    <!-- End of Modal -->
+
+                </div>
+                <!-- End of Tab 1 Content -->
+
+            </div>
+            <!-- End of Tab Content Wrapper -->
+
+            </div>
+            <!-- End of Row -->
+
+            </div>
+    </section>
+
+
+    <%- include('./partials/footer') %>

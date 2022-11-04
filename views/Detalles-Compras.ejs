@@ -1,0 +1,201 @@
+<%- include('./partials/header') %>
+
+
+    <hr>
+    <section class="services-page3 ptb80">
+        <%- include('./partials/flash') %>
+            <div class="container">
+
+                <!-- Start of Row -->
+                <div class="row">
+                    <!-- Start of Tab Content Wrapper -->
+                    <div class="row tab-content custom-tabs">
+
+                        <!-- Start of Tab 1 Content -->
+                        <div role="tabpanel" class="tab-pane fade active in" id="tab">
+
+                            <!-- Tabpanel Column -->
+
+                            <div class="col-md-12 tabpanel-col">
+                                <% for(var Producto of compra) {%>
+                                    <form action="/Compras/edit/<%= Producto._id %>" method="post">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <h2>Fecha de Creación:</h2>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h3 style="font-weight:normal">
+                                                    <%= Producto.FechaCreacion %>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <h2>Pago:</h2>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h3 style="font-weight:normal">
+                                                    <%= Producto.Pago %>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <h2>Método de Contacto:</h2>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h3 style="font-weight:normal">
+                                                    <%= Producto.MetodoContacto %>
+                                                </h3>
+                                            </div>
+                                        </div>
+
+                                        <br>
+                                        <% if (role==='ADMIN' ){ %>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <h2>Estado del ticket:</h2>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <select name="estado" id="estado" class="form-control">
+                                                        <option selected hidden>
+                                                            <%= Producto.estado%>
+                                                        </option>
+                                                        <option>En progreso</option>
+                                                        <option>Completado</option>
+                                                        <option>Cancelado</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <% } else if (role==='USER' ) { %>
+                                                <% if (Producto.estado==='En progreso' ){ %>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <h2>Estado del ticket:</h2>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <select name="estado" id="estado" class="form-control">
+                                                                <option>
+                                                                    <%= Producto.estado%>
+                                                                </option>
+                                                                <option>Cancelado</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <% } else if (Producto.estado==='Cancelado' ||
+                                                        Producto.estado==='Completado' ) { %>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <h2>Estado del ticket:</h2>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <h3 style="font-weight:normal" name="estado">
+                                                                    <%= Producto.estado%>
+                                                                </h3>
+                                                            </div>
+                                                        </div>
+                                                        <% }} %>
+
+                                                            <br>
+                                                            <br>
+
+                                                            <!-- Lista de productos comprados -->
+                                                            <div class="table_block table-responsive">
+                                                                <table class="table table-bordered table-hover">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th class="col-md-5">Nombre del producto
+                                                                            </th>
+                                                                            <th class="col-md-2">Precio</th>
+                                                                            <th class="col-md-3">Cantidad</th>
+                                                                            <th class="col-md-3">Total</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <% for(var Producto of Producto.Productos) {%>
+
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <div class="product-name">
+                                                                                        <h4 style="font-weight: normal">
+                                                                                            <%= Producto.nombreProducto
+                                                                                                %>
+                                                                                        </h4>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div class="product-name">
+                                                                                        <h4>
+                                                                                            ₡ <%= Producto.precio - (Producto.precio * Producto.descuento /100 ) %>
+                                                                                        </h4>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div class="product-name">
+                                                                                        <h4>
+                                                                                            <i>
+                                                                                                <%= Producto.cantidad %>
+                                                                                            </i>
+                                                                                        </h4>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div class="product-name">
+                                                                                        <h4>
+                                                                                            <i>
+                                                                                                ₡ <%= Producto.cantidad * (Producto.precio - (Producto.precio * Producto.descuento /100 ))%>
+                                                                                            </i>
+                                                                                        </h4>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <% }} %>
+                                                                    </tbody>
+                                                                </table>
+                                                                <div class="col-md-4">
+                                                                    
+                                                                <a type="button" data-toggle="modal" data-target="#Actualizar" class="btn btn-border btn-dark nomargin">Actualizar</a>
+
+                                    <a href="PerfilCompras/1"
+                                        class="btn btn-border btn-blue btn-blue nomargin">Regresar</a>
+                            </div>
+                        </div>
+
+                        <!-- Start of Modal -->
+
+                        <div class="modal" id="Actualizar" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h2 class="modal-title text-center">Actualizar</h2>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        <p>¿Desea actualizar el estado del ticket?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="submit" class="btn btn-border btn-blue btn-dark nomargin"
+                                            value="Actualizar" />
+                                        <button type="button" class="btn btn-border btn-blue"
+                                            data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                        <!-- End of Modal -->
+
+                    </div>
+                    <!-- End of Tab 1 Content -->
+
+                </div>
+                <!-- End of Tab Content Wrapper -->
+
+            </div>
+            <!-- End of Row -->
+
+            </div>
+    </section>
+
+
+    <%- include('./partials/footer') %>

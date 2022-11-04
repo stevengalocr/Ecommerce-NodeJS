@@ -1,0 +1,136 @@
+<%- include('./partials/header') %>
+
+
+    <!-- ===== Start of Page Title ===== -->
+    <section class="page-title ptb60 overlay-black">
+        <div class="container">
+            <h2 class="uppercase">Bitacora</h2>
+            <div class="breadcrumbs pt10">
+                <h5><a href="index">Inicio</a> / Bitácoras</h5>
+            </div>
+        </div>
+    </section>
+    <!-- ===== End of Page Title ===== -->
+    
+    
+   <!-- ===== Start of Main Section ===== -->
+   <section class="domain-page ptb40">
+    <%- include('./partials/flash') %>
+    <div class="container">
+        
+
+                <!-- ===== Start of Bitacora ===== -->
+                <div class="col-md-8 domain-results">
+                <div class="table-responsive">
+                <table id="tablaBitacora" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="col-md-2">Nombre Empresa</th> 
+                            <th class="col-md-3">Fecha de Creación</th>
+                            <th class="col-md-1">Telefono</th> 
+                            <th class="col-md-2">Correo Electrónico</th> 
+                            <th class="col-md-2">Responsable</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% bitacoras.forEach( (Bitacora) => { %>
+                            <tr>
+                                <td><%= Bitacora.nombreEmpresa %></td>
+                                <td><%= Bitacora.fechaCreacion %></td>
+                                <td><%= Bitacora.telefono %></td>
+                                <td><%= Bitacora.correo%></td>
+                                <td><%= Bitacora.responsable %></td>
+                                <td class="col-md-2">
+                                    <a type="button" data-toggle="modal" data-target="#Modal-<%= Bitacora._id %>" class="btn btn-border btn-danger col-md-11">Eliminar</a>
+                                    <a href="/BitacoraEditar/<%= Bitacora._id %>/1" type="button" class="btn btn-border btn-blue btn-dark col-md-11">Modificar</a>
+                                </td>
+                            </tr>
+
+                            <!-- Start of Modal -->
+
+                            <div class="modal" id="Modal-<%= Bitacora._id %>" tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h2 class="modal-title text-center">Eliminar</h2>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                      <p>¿Desea eliminar la bitácora?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <a href="/EliminarBitacora/<%= Bitacora._id %>" type="button" class="btn btn-border btn-danger">Eliminar</a>
+                                      <button type="button" class="btn btn-border btn-blue" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- End of Modal -->
+                        
+                            <% }) %>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        
+        <aside class="col-md-4">
+            <div class="domain-sidebar">
+
+                <!-- Start of formulary -->
+
+                <div class="text-center">
+                    <form action="/Bitacora/add" method="post">
+                        <h4 class="text-center">Agregar bitácora</h4><br>
+                        <input class="form-control input-box" type="text" name="nombreEmpresa"
+                            placeholder="Nombre Empresa" required><br>
+                        <input class="form-control input-box" type="date" name="fechaCreacion" required><br>
+                        <input class="form-control input-box" type="text" name="telefono" placeholder="Teléfono" required><br>
+                        <input class="form-control input-box" type="email" name="correo"
+                            placeholder="Correo electrónico" required><br>
+                        <input class="form-control input-box" type="text" name="responsable" placeholder="Responsable" required><br>
+                        <button class="btn btn-border btn-blue btn-dark" type="submit">Guardar</button>
+                    </form>
+                </div>
+            </div>
+                <!-- End of formulary -->
+        </aside>
+        <!-- ===== End of Bitacora ===== -->
+
+        <!-- ===== Start of Pagination ===== -->
+    <div class="col-md-8 text-center">
+    <% if (paginas > 1) { %>
+        <ul class="pagination text-center">
+            <% if (current == 1) { %>
+                <li class="disabled"><a>Primero</a></li>
+            <% } else { %>
+                <li><a href="/Bitacora/1">Primero</a></li>
+            <% } %>
+            <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+            <% if (i !== 1) { %>
+                <li class="disabled"><a>...</a></li>
+            <% } %>
+            <% for (; i <= (Number(current) + 4) && i <= paginas; i++) { %>
+                <% if (i == current) { %>
+                    <li class="active"><a><%= i %></a></li>
+                <% } else { %>
+                    <li><a href="/Bitacora/<%= i %>"><%= i %></a></li>
+                <% } %>
+                <% if (i == Number(current) + 4 && i < paginas) { %>
+                    <li class="disabled"><a>...</a></li>
+                <% } %>
+            <% } %>
+            <% if (current == paginas) { %>
+                <li class="disabled"><a>Último</a></li>
+            <% } else { %>
+                <li><a href="/Bitacora/<%= paginas %>">Último</a></li>
+            <% } %>
+        </ul>
+    <% } %>
+    </div>
+    </div>
+    <!-- ===== End of Pagination ===== -->
+</section>
+<!-- ===== End of Main Section ===== -->
+
+
+<%- include('./partials/footer') %>

@@ -1,0 +1,138 @@
+<!-- Start of Compras Realizadas -->
+<div role="tabpanel" class="tab-pane fade active in">
+    <div class="col-md-12 col-xs-12">
+        <div class="table_block table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="col-md-2">Fecha</th>
+                        <th class="col-md-3">Contacto</th>
+                        <th class="col-md-2">Total</th>
+                        <th class="col-md-3">Estado</th>
+                        <th class="col-md-2">Detalles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (role==='USER' ){ %>
+                        <% if (compras !=null){ for(var Producto of compras) { %>
+                            <tr>
+                                <td>
+                                    <div class="product-name">
+                                        <h4 style="font-weight: normal">
+                                            <%= Producto.FechaCreacion %>
+                                        </h4>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="product-name">
+                                        <h4 style="font-weight: normal">
+                                            <%= Producto.Contacto %>
+                                        </h4>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="product-name">
+                                        <%   let totalPrecio = parseFloat(Producto.TotalPrecio) %>
+                                        <%   let commasTotalPrecio = totalPrecio.toLocaleString('en-US', {maximumFractionDigits:2}) %>
+                                        <h4> ₡ <%= commasTotalPrecio %></h4>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="product-name">
+                                        <h4 class="text-blue">
+                                            <i><%= Producto.estado %></i>
+                                        </h4>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="product-name text-center">
+                                        <a href="Detalles-Compras/<%= Producto._id %>" type="button">
+                                            <i><h5>Visualizar</h5></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                    <% }} %>
+                        <% } else if (role==='ADMIN' ) { %>
+                                <% if (compras !=null){ for(var Producto of compras) { %>
+                                    <tr>
+                                        <td>
+                                            <div class="product-name">
+                                                <h4 style="font-weight: normal">
+                                                    <%= Producto.FechaCreacion %>
+                                                </h4>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="product-name">
+                                                <h4 style="font-weight: normal">
+                                                    <%= Producto.Contacto %>
+                                                </h4>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="product-name">
+                                                <%   let totalPrecio = parseFloat(Producto.TotalPrecio) %>
+                                                <%   let commasTotalPrecio = totalPrecio.toLocaleString('en-US', {maximumFractionDigits:2}) %>
+                                                <h4>
+                                                    ₡ <%= commasTotalPrecio %>
+                                                </h4>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="product-name">
+                                                <h4 class="text-blue">
+                                                    <i><%= Producto.estado %></i>
+                                                </h4>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="product-name text-center">
+                                                <a href="Detalles-Compras/<%= Producto._id %>">
+                                                    <i><h5>Visualizar</h5></i>
+                                                </a>
+                                                <br>
+                                            </div>
+                                        </td>
+                                    </tr>
+                        <% }}} %>
+                </tbody>
+            </table>
+        </div>
+
+                <!-- Start of Paginación -->
+                <div class="col-md-12 text-center">
+                    <% if (paginas > 1) { %>
+                        <ul class="pagination text-center">
+                            <% if (current == 1) { %>
+                                <li class="disabled"><a>Primero</a></li>
+                            <% } else { %>
+                                <li><a href="/PerfilCompras/1">Primero</a></li>
+                            <% } %>
+                            <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                            <% if (i !== 1) { %>
+                                <li class="disabled"><a>...</a></li>
+                            <% } %>
+                            <% for (; i <= (Number(current) + 4) && i <= paginas; i++) { %>
+                                <% if (i == current) { %>
+                                    <li class="active"><a><%= i %></a></li>
+                                <% } else { %>
+                                    <li><a href="/PerfilCompras/<%= i %>"><%= i %></a></li>
+                                <% } %>
+                                <% if (i == Number(current) + 4 && i < paginas) { %>
+                                    <li class="disabled"><a>...</a></li>
+                                <% } %>
+                            <% } %>
+                            <% if (current == paginas) { %>
+                                <li class="disabled"><a>Último</a></li>
+                            <% } else { %>
+                                <li><a href="/PerfilCompras/<%= paginas %>">Último</a></li>
+                            <% } %>
+                        </ul>
+                    <% } %>
+                </div>
+            <!-- End of Paginación -->
+
+    </div>
+</div>
+<!-- End of Compras Realizadas -->

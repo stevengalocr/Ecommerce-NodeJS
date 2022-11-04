@@ -1,0 +1,58 @@
+<%- include('./partials/header') %>
+
+
+    <!-- ===== Main Section ===== -->
+    <section class="login-page fullscreen overlay-blue">
+        <!-- Main Content -->
+        <div class="login-box">
+
+            <%- include('./partials/flash-login') %>
+
+            <!-- Start of Register Form -->
+            <form action="/Register" method="POST" id="login-form">
+                <div class="text-center">
+                    <h3 class="uppercase">Nueva cuenta</h3>
+                </div>
+                
+                <input type="text" id="nombre" name="nombre" class="form-control mt15" placeholder="Nombre" />
+                <input type="text" id="apellido" name="apellido" class="form-control mt15" placeholder="Apellido" />
+                <input type="text" id="email" name="email" class="form-control mt15" placeholder="Correo electrónico" />
+                <input type="password" id="password" name="password" class="form-control mt15" placeholder="Contraseña" />
+                <input type="password" id="repassword" name="repassword" class="form-control mt15" placeholder="Confirmar contraseña" />
+
+                <div class="mt15 text-center">
+                    <button class="btn btn-border btn-blue" type="submit">Registrarse</button>
+                </div>
+
+                <div class="mt10 text-center">
+                    <p>¿Ya tienes una cuenta? <a href="Login">Inicia sesión</a></p>
+                </div>
+            </form>
+            <!-- End of Register Form -->
+        </div>
+        <!-- End of Main Content -->
+    </section>
+    <!-- ===== End of Main Section =====  -->
+
+
+    <!-- ===== All Javascript at the bottom of the page for faster page loading ===== -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/simple-expand.min.js"></script>
+    <script src="js/jquery.countTo.js"></script>
+    <script src="js/jquery.inview.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/jquery.nav.js"></script>
+    <script src="js/jquery.ajaxchimp.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.easypiechart.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/custom.js"></script>
+
+</body>
+
+</html>

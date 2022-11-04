@@ -1,0 +1,23 @@
+<!-- Start of Datos Personales -->
+<div role="tabpanel" class="tab-pane fade active in">
+    <div class="col-md-12 tabpanel-col">
+        <form action="/Perfil/:nombre/:apellidos" method="post">
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Nombre</h4>
+                    <input class="form-control input-box mb20" type="text" name="nombre" value="<%= usuarioDatos.nombre %>">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Apellidos</h4>
+                    <input class="form-control input-box mb20" type="text" name="apellidos" value="<%= usuarioDatos.apellido %>">
+                </div>
+            </div>
+            <div class="pt10">
+                <button class="btn btn-border btn-blue btn-dark nomargin">Actualizar datos</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- End of Datos Personales -->

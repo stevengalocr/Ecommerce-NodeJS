@@ -1,0 +1,153 @@
+<%- include('./partials/header') %>
+
+
+    <!-- ===== Start of Page Title ===== -->
+    <section class="page-title ptb50 overlay-black">
+        <div class="container">
+            <h2 class="uppercase">Bitacora</h2>
+            <div class="breadcrumbs pt10">
+                <h5><a href="Bitacora/1">Bitacora</a> / Modificar Bitácoras</h5>
+            </div>
+        </div>
+    </section>
+    <!-- ===== End of Page Title ===== -->
+
+    <!-- ===== Start of Main Section ===== -->
+    <section class="domain-page ptb40">
+        <%- include('./partials/flash') %>
+        <div class="container" style="margin-top: 20px;">
+
+            <!-- ===== Start of domain sidebar ===== -->
+            <aside class="col-md-6">
+                <div class="domain-sidebar">
+                    <!-- Start of formulary -->
+
+                    <div class="text-center">
+                        <form action="/Bitacora/edit/<%= bitacora._id %>" method="post">
+                            <h4 class="text-center">Modificar bitácora</h4><br>
+                            <input class="form-control input-box" type="text" name="nombreEmpresa"
+                                value="<%= bitacora.nombreEmpresa %>" required><br>
+                            <input class="form-control input-box" type="date" name="fechaCreacion" value="<%= bitacora.fechaCreacion %>" required><br>
+                            <input class="form-control input-box" type="text" name="telefono" placeholder="Teléfono"
+                                value="<%= bitacora.telefono %>" required><br>
+                            <input class="form-control input-box" type="email" name="correo"
+                                placeholder="Correo electrónico" value="<%= bitacora.correo %>" required><br>
+                            <input class="form-control input-box" type="text" name="responsable"
+                                placeholder="Responsable" value="<%= bitacora.responsable %>" required><br>
+                            <button class="btn btn-border btn-blue btn-dark" type="submit">Actualizar</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- End of formulary -->
+            </aside>
+            <!-- ===== End of domain sidebar ===== -->
+            <aside class="col-md-6">
+                <div class="domain-sidebar">
+                    <div class="text-center">
+                        <form action="/BitacoraEditar/<%= bitacora._id %>/add" method="post">
+                            <h4 class="text-center">Agregar mantenimiento</h4><br>
+                            <input class="form-control input-box" type="date" name="fechaMantenimiento" required><br>
+                            <input class="form-control input-box" type="text" name="responsableMantenimiento" placeholder="Responsable" required>
+                            <textarea class="form-control textarea-box mtb20" rows="6" name="comentarios" placeholder="Comentarios"></textarea>
+                            <button class="btn btn-border btn-blue btn-dark" type="submit">Guardar</button>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </section>
+    <section class="domain-page ptb80">
+        <div class="container">
+            <div class="col-md-12 domain-results">
+                <div class="table-responsive">
+                <table id="tablaMantenimiento" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="col-md-3">Fecha de Creación</th>
+                            <th class="col-md-3">Responsable</th>
+                            <th class="col-md-4">Comentarios</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% var idBitacora = bitacora._id %>
+                        <% if (bitacoras != null){ for( var Bitacora of bitacoras) { %>
+                            <tr>
+                                <td><%= Bitacora.fechaMantenimiento %></td>
+                                <td><%= Bitacora.responsableMantenimiento %></td>
+                                <td><%= Bitacora.comentarios %></td>
+                                <td class="col-md-2">
+                                    <a type="button" data-toggle="modal" data-target="#Modal-<%= Bitacora._id %>" class="btn btn-border btn-danger col-md-11">Eliminar</a>
+                                    <a href="/EditarMantenimiento/<%= idBitacora %>/<%= Bitacora._id %>" type="button" class="btn btn-border btn-blue btn-dark col-md-11">Modificar</a>
+                                </td>
+                            </tr>
+
+                    <!-- Start of Modal -->
+
+                    <div class="modal" id="Modal-<%= Bitacora._id %>" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2 class="modal-title text-center">Eliminar</h2>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <p>¿Desea eliminar el mantenimiento?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="/EliminarMantenimiento/<%= idBitacora %>/<%= Bitacora._id %>"  type="button" class="btn btn-border btn-danger">Eliminar</a>
+                                    <button type="button" class="btn btn-border btn-blue" data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- End of Modal -->
+
+                        <% }} %>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+
+
+             <!-- ===== Start of Pagination ===== -->
+    <div class="col-md-12 text-center">
+        <% if (paginas > 1) { %>
+            <ul class="pagination text-center">
+                <% if (current == 1) { %>
+                    <li class="disabled"><a>Primero</a></li>
+                <% } else { %>
+                    <li><a href="/BitacoraEditar/<%= bitacora._id %>/<%= paginas %>">Primero</a></li>
+                <% } %>
+                <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                <% if (i !== 1) { %>
+                    <li class="disabled"><a>...</a></li>
+                <% } %>
+                <% for (; i <= (Number(current) + 4) && i <= paginas; i++) { %>
+                    <% if (i == current) { %>
+                        <li class="active"><a><%= i %></a></li>
+                    <% } else { %>
+                        <li><a href="/BitacoraEditar/<%= bitacora._id %>/<%= paginas %>"><%= i %></a></li>
+                    <% } %>
+                    <% if (i == Number(current) + 4 && i < paginas) { %>
+                        <li class="disabled"><a>...</a></li>
+                    <% } %>
+                <% } %>
+                <% if (current == paginas) { %>
+                    <li class="disabled"><a>Último</a></li>
+                <% } else { %>
+                    <li><a href="/BitacoraEditar/<%= bitacora._id %>/<%= paginas %>">Último</a></li>
+                <% } %>
+            </ul>
+        <% } %>
+        </div>
+        </div>
+        <!-- ===== End of Pagination ===== -->
+
+
+        </div>
+    </section>
+    <!-- ===== End of Main Section ===== -->
+
+    
+    <%- include('./partials/footer') %>

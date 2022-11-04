@@ -1,0 +1,50 @@
+<% if(success && success.length) {%>
+    <div class="mt15">
+        <div class="text-center alert alert-success" style="padding-bottom: 5px; padding-top: 5px; margin-left: 5px; margin-right: 5px; margin-bottom: 0px;" role="alert">
+            <%= success %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+<% } %>
+
+<% if(successGlobal && successGlobal.length) {%>
+    <div class="text-center alert alert-success fixed" role="alert">
+        <%= successGlobal %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<% } %>
+
+<% if(error && error.length) {%>
+    <div class="mt15">
+        <div class="text-center alert alert-danger" style="padding-bottom: 5px; padding-top: 5px; margin-left: 5px; margin-right: 5px; margin-bottom: 0px;" role="alert">
+            <%= error %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+<% } %>
+
+<% if(errorGlobal && errorGlobal.length) {%>
+    <div class="text-center alert alert-danger fixed" role="alert">
+        <%= errorGlobal %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<% } %>
+
+<% if(warning && warning.length) {%>
+    <div class="mt15">
+        <div class="text-center alert alert-warning fixed" role="alert">
+            <%= warning %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+<% } %>

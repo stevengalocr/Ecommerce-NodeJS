@@ -1,0 +1,247 @@
+<%- include('./partials/header') %>
+
+
+    <!-- ===== Start of Page Title ===== -->
+    <section class="page-title ptb50 overlay-black">
+        <div class="container">
+            <h2 class="uppercase">Productos</h2>
+            <div class="breadcrumbs pt10">
+                <h5><a href="index">Inicio</a> / Pedidos</h5>
+            </div>
+        </div>
+    </section>
+    <!-- ===== End of Page Title ===== -->
+
+    <!-- ===== Start of Main Section ===== -->
+    <section class="cart-page ptb80">
+        <%- include('./partials/flash') %>
+            <div class="container">
+
+                <!-- ===== Start of Order Content ===== -->
+                <div class="col-md-8 col-xs-12">
+
+                    <div class="table_block table-responsive">
+                        <table class="table cart-content">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-4">producto</th>
+                                    <th class="col-md-2">cantidad</th>
+                                    <th class="col-md-2">precio</th>
+                                    <th class="col-md-2">subtotal</th>
+                                    <th class="col-md-2">&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Start of Product -->
+                                <% if (carrito != null){ for(var Producto of carrito) { %>
+                                    <form action="/Pedidos/cantidad" method="POST">
+                                        <tr>
+                                            <td>
+                                                <div class="product-name">
+                                                    <h3>
+                                                        <%= Producto.nombreProducto %>
+                                                    </h3>
+                                                    <div class="tag-line">
+                                                        Categoría Producto
+                                                    </div>
+                                                </div>
+                                            </td>
+
+                                            <td>
+                                                <div class="term">
+                                                    <input type="number" name="cantidad"
+                                                        value="<%= Producto.cantidad %>">
+                                                    <input type="hidden" name="id" value="<%= Producto._id %>">
+                                                </div>
+                                            </td>
+
+                                            <td>
+                                                <div class="price">
+
+                                                    <%   let precios = parseFloat(Producto.precio) %>
+                                                    <%   let commas = precios.toLocaleString('en-US', {maximumFractionDigits:2}) %>
+
+                                                    <% if (Producto.descuento === 0){ %>
+
+                                                        ₡<%= commas %>
+
+                                                    <% } else { %>
+
+                                                        <%   let precioDescuento = Producto.precio - (Producto.precio * Producto.descuento / 100) %>
+                                                        <%   let precioNuevo = parseFloat(precioDescuento) %>
+                                                        <%   let precioDecimales = precioNuevo.toLocaleString('en-US', {maximumFractionDigits:2}) %>
+                                                        <span style="font-size: 1.8rem;">₡<%= precioDecimales %></span>
+                                                        <s style="color: red;">₡<%= commas %></s>
+
+                                                    <% } %>
+                                                </div>
+                                            </td>
+
+                                            <td>
+                                                <div class="price">
+                                                    <%   let preciosTotal = parseFloat(Producto.precio * Producto.cantidad) %>
+                                                    <%   let commasTotal = preciosTotal.toLocaleString('en-US', {maximumFractionDigits:2}) %>
+
+                                                    <% if (Producto.descuento === 0){ %>
+
+                                                        ₡<%= commasTotal %>
+
+                                                    <% } else { %>
+
+                                                        <%   let precioDescuento = (Producto.precio * Producto.cantidad) - ((Producto.precio * Producto.cantidad) * Producto.descuento / 100) %>
+                                                        <%   let precioNuevo = parseFloat(precioDescuento) %>
+                                                        <%   let precioDecimales = precioNuevo.toLocaleString('en-US', {maximumFractionDigits:2}) %>
+                                                        <span style="font-size: 1.8rem;">₡<%= precioDecimales %></span>
+                                                        <s style="color: red;">₡<%= commasTotal %></s>
+                                                    
+                                                    <% } %>
+
+                                                </div>
+                                            </td>
+
+                                            <td>
+                                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                    <button class="btn btn-border btn-blue btn-dark col-md-12"
+                                                        style="margin: 0">Actualizar</button>
+                                                </div>
+                                    </form>
+                                    <form action="/Pedidos/eliminar" method="POST">
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                            <input type="hidden" name="id" value="<%= Producto._id %>">
+                                            <a class="btn btn-border btn-blue btn-danger col-md-12" type="button" data-toggle="modal" data-target="#Modal-<%= Producto._id %>" style="margin: 0">Eliminar</a>
+
+                                        </div>
+                                        </td>
+                                        </tr>
+
+                    <!-- Start of Modal -->
+
+                    <div class="modal" id="Modal-<%= Producto._id %>" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2 class="modal-title text-center">Eliminar</h2>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <p>¿Desea eliminar el producto del carrito?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="submit" class="btn btn-border btn-danger" value="Eliminar" />
+                                    <button type="button" class="btn btn-border btn-blue" data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- End of Modal -->
+                </form>
+                                    <% }} %>
+                                        <!-- End of Product -->
+                            </tbody>
+                        </table>
+
+                                <!-- Start of Paginación -->
+        <div class="col-md-12 text-center">
+            <% if (paginas > 1) { %>
+                <ul class="pagination text-center">
+                    <% if (current == 1) { %>
+                        <li class="disabled"><a>Primero</a></li>
+                    <% } else { %>
+                        <li><a href="/Pedidos/1">Primero</a></li>
+                    <% } %>
+                    <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                    <% if (i !== 1) { %>
+                        <li class="disabled"><a>...</a></li>
+                    <% } %>
+                    <% for (; i <= (Number(current) + 4) && i <= paginas; i++) { %>
+                        <% if (i == current) { %>
+                            <li class="active"><a><%= i %></a></li>
+                        <% } else { %>
+                            <li><a href="/Pedidos/<%= i %>"><%= i %></a></li>
+                        <% } %>
+                        <% if (i == Number(current) + 4 && i < paginas) { %>
+                            <li class="disabled"><a>...</a></li>
+                        <% } %>
+                    <% } %>
+                    <% if (current == paginas) { %>
+                        <li class="disabled"><a>Último</a></li>
+                    <% } else { %>
+                        <li><a href="/Pedidos/<%= paginas %>">Último</a></li>
+                    <% } %>
+                </ul>
+            <% } %>
+        </div>
+    <!-- End of Paginación -->
+
+                    </div>
+                </div>
+                <!-- ===== End of Order Content ===== -->
+
+
+
+                <!-- ===== Start of Proceed to Checkout ===== -->
+                <div class="col-md-4 col-xs-12">
+                    <div class="subtotal-content">
+
+                        <div class="row cart-subtotal">
+                            <div class="col-md-6">
+                                <h4>Subtotal</h4>
+                            </div>
+                            <div class="col-md-6 cart-right">
+                                <%   let subtotalCardFinal = parseFloat(subtotal) %>
+                                <%   let commasSubtotalCardFinal = subtotalCardFinal.toLocaleString('en-US', {maximumFractionDigits:2}) %>
+                                <h4>₡<%= commasSubtotalCardFinal %></h4>
+                            </div>
+                        </div>
+
+                        <div class="row tax">
+                            <div class="col-md-6">
+                                <span>Descuentos</span>
+                            </div>
+                            <div class="col-md-6 cart-right">
+                                <%   let descuentosTotalCardFinal = parseFloat(descuento) %>
+                                <%   let commasDescuentosTotalCardFinal = descuentosTotalCardFinal.toLocaleString('en-US', {maximumFractionDigits:2}) %>
+                                <span>₡<%= commasDescuentosTotalCardFinal %></span>
+                            </div>
+                        </div>
+
+
+                        
+                        <br><br>
+                        <div class="row order-total">
+                            <div class="col-xs-6">
+                                <h4>Total<br><span>IVA incluído</span></h4>
+                            </div>
+                            <div class="col-xs-6 cart-right">
+                                <%   let totalCardFinal = parseFloat(total) %>
+                                <%   let commasTotalCardFinal = totalCardFinal.toLocaleString('en-US', {maximumFractionDigits:2}) %>
+                                <span class="price">₡<%= commasTotalCardFinal %></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 cta">
+                            <% if (carrito.length != 0) { %>
+                                <a href="MetodoPago" class="btn btn-border btn-blue btn-dark">Realizar pedido</a>
+                            <% } else { %>
+                                <a class="btn btn-border btn-blue btn-dark disabled">Realizar pedido</a>
+                            <% } %>
+                        </div>
+                        <div class="row support text-center">
+                            <div class="col-md-12">
+                                <h4>¿Alguna duda?</h4>
+                            </div>
+                            <div class="col-md-12">
+                                <a>Llámenos: 2548 0137</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- ===== End of Proceed to Checkout ===== -->
+            </div>
+    </section>
+    <!-- ===== End of Main Section ===== -->
+
+
+
+    <%- include('./partials/footer') %>

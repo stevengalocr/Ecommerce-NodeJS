@@ -1,0 +1,107 @@
+<%- include('./partials/header') %>
+
+
+    <!-- ===== Start of Page Title ===== -->
+    <section class="page-title ptb50 overlay-black">
+        <div class="container">
+            <h2 class="uppercase">Administrador</h2>
+            <div class="breadcrumbs pt10">
+                <h5><a href="index">Inicio</a> / Administrador</h5>
+            </div>
+        </div>
+    </section>
+    <!-- ===== End of Page Title ===== -->
+
+
+    <!-- ===== Start of Main Section ===== -->
+    <section class="contact-page ptb20">
+        <%- include('./partials/flash') %>
+            <div class="container">
+
+
+                <!-- ===== Start of Contact Form ===== -->
+                <div class="col-md-8 col-md-offset-2">
+                    <h3 class="uppercase text-center">Agregar Un Administrador</h3>
+
+                    <div class="row contact-form pt40">
+                        <!-- start of form -->
+                        <form action="/OtorgarPermisos" method="POST">
+
+                            <div class="col-md-4">
+                                <label style="font-size: large;">Correo de cuenta usuario</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input id="email" class="form-control input-box mb20" type="email" name="email"
+                                    placeholder="Correo" required>
+
+                            </div>
+                    </div>
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-4">
+                        <a name="permisos" type="button" class="btn btn-border btn-dark" data-toggle="modal" data-target="#OtorgarModal">Otorgar permisos</a>
+                    </div>
+                    <div class="col-md-4">
+                        <a name="permisos" type="button" class="btn btn-border btn-danger" data-toggle="modal" data-target="#RevocarModal">Revocar permisos</a>
+                    </div>
+                                
+                    <!-- Start of Modal -->
+
+                    <div class="modal" id="OtorgarModal" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2 class="modal-title text-center">Otorgar permisos</h2>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <p>¿Desea otorgar permisos?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <input name="permisos" value="Otorgar permisos" type="submit"
+                            class="btn btn-border btn-blue btn-dark" />
+                                    <button type="button" class="btn btn-border btn-blue"
+                                        data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- End of Modal -->
+
+
+                    <!-- Start of Modal -->
+
+                    <div class="modal" id="RevocarModal" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2 class="modal-title text-center">Revocar permisos</h2>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <p>¿Desea revocar permisos?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <input name="permisos" value="Revocar permisos" type="submit"
+                            class="btn btn-border btn-danger" />
+                                    <button type="button" class="btn btn-border btn-blue"
+                                        data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- End of Modal -->
+
+
+                    </form>
+                    <!-- end of form -->
+
+                </div>
+                <!-- ===== End of Contact Form ===== -->
+            </div>
+    </section>
+    <!-- ===== End of Main Section ===== -->
+
+
+    <%- include('./partials/footer') %>

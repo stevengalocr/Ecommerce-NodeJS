@@ -1,0 +1,109 @@
+<%- include('./partials/header') %>
+
+
+    <!-- ===== Start of Page Title ===== -->
+    <section class="page-title ptb50 overlay-black">
+        <div class="container">
+            <h2 class="uppercase">Notificaciones</h2>
+            <div class="breadcrumbs pt10">
+                <h5>Administrador</h5>
+            </div>
+        </div>
+    </section>
+    <!-- ===== End of Page Title ===== -->
+
+    <section class="domain-page ptb80">
+        <%- include('./partials/flash') %>
+        <div class="container">
+            <div class="col-md-12 domain-results">
+                <div class="table-responsive">
+                <table id="tablaMantenimiento" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="col-md-2">Usuario</th>
+                            <th class="col-md-2">Correo</th>
+                            <th class="col-md-6">Acción</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (notifica != null){ for (var Notificacion of notifica) { %>
+                            <tr>
+                                <td><%= Notificacion.nombreUsuario %></td>
+                                <td><%= Notificacion.correo %></td>
+                                <td><%= Notificacion.accion %></td>
+                                <td class="col-md-2">
+                                <% if (Notificacion.leida == false){ %>
+                                    <a href="/NotificacionesLeida/<%= Notificacion._id %>" type="button" class="btn btn-border btn-blue btn-dark col-md-11">Marcar como leída</a>
+                                <% } else { %>
+                                    <a class="btn btn-border btn-blue btn-dark col-md-11 disabled">Leída</a>
+                                <% } %>
+                                <a type="button" data-toggle="modal" data-target="#Modal-<%= Notificacion._id %>" class="btn btn-border btn-danger col-md-11">Eliminar</a>
+                                </td>
+                            </tr>
+
+
+                            <!-- Start of Modal -->
+
+                            <div class="modal" id="Modal-<%= Notificacion._id %>" tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h2 class="modal-title text-center">Eliminar</h2>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                      <p>¿Desea eliminar la notificación?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <a href="/NotificacionesEliminar/<%= Notificacion._id %>" type="button" class="btn btn-border btn-danger">Eliminar</a>
+                                      <button type="button" class="btn btn-border btn-blue" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- End of Modal -->
+
+                        <% }} %>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+
+        <!-- Start of Paginación -->
+        <div class="col-md-12 text-center">
+            <% if (paginas > 1) { %>
+                <ul class="pagination text-center">
+                    <% if (current == 1) { %>
+                        <li class="disabled"><a>Primero</a></li>
+                    <% } else { %>
+                        <li><a href="/Notificaciones/1">Primero</a></li>
+                    <% } %>
+                    <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                    <% if (i !== 1) { %>
+                        <li class="disabled"><a>...</a></li>
+                    <% } %>
+                    <% for (; i <= (Number(current) + 4) && i <= paginas; i++) { %>
+                        <% if (i == current) { %>
+                            <li class="active"><a><%= i %></a></li>
+                        <% } else { %>
+                            <li><a href="/Notificaciones/<%= i %>"><%= i %></a></li>
+                        <% } %>
+                        <% if (i == Number(current) + 4 && i < paginas) { %>
+                            <li class="disabled"><a>...</a></li>
+                        <% } %>
+                    <% } %>
+                    <% if (current == paginas) { %>
+                        <li class="disabled"><a>Último</a></li>
+                    <% } else { %>
+                        <li><a href="/Notificaciones/<%= paginas %>">Último</a></li>
+                    <% } %>
+                </ul>
+            <% } %>
+        </div>
+    <!-- End of Paginación -->
+
+        </div>
+    </section>
+
+    
+    <%- include('./partials/footer') %>

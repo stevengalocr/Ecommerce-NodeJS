@@ -1,0 +1,53 @@
+<%- include('./partials/header') %>
+
+    <hr>
+    <section class="services-page3 ptb80">
+
+        <%- include('./partials/flash') %>
+
+            <div class="container">
+                <div class="row">
+                    <!-- Start of Custom Tab Menu -->
+                    <ul class="nav nav-tabs custom-tabs" style="margin-top: 15px;" role="tablist">
+
+                        <!-- Tab Menu Item -->
+                        <li class="col-md-3 col-sm-3 col-xs-12" role="presentation">
+                            <a href="/Perfil" aria-expanded="false">Datos Personales</a>
+                        </li>
+
+                        <!-- Tab Menu Item -->
+                        <li class="col-md-2 col-sm-2 col-xs-12" role="presentation">
+                            <a href="/PerfilReparaciones/1" aria-expanded="true">Reparaciones</a>
+                        </li>
+
+                        <!-- Tab Menu Item -->
+                        <li class="col-md-2 col-sm-2 col-xs-12" role="presentation">
+                            <a href="/PerfilCotizaciones/1" aria-expanded="true">Cotizaciones</a>
+                        </li>
+
+                        <!-- Tab Menu Item -->
+                        <li class="col-md-3 col-sm-3 col-xs-12 active" role="presentation">
+                            <a href="/PerfilCompras/1" aria-expanded="true">Compras Realizadas</a>
+                        </li>
+
+                        <!-- Tab Menu Item -->
+                        <li class="col-md-2 col-sm-2 col-xs-12" role="presentation">
+                            <a href="/PerfilContra" aria-expanded="true">Contraseña</a>
+                        </li>
+                    </ul>
+                    <!-- End of Custom Tab Menu -->
+
+
+                    <!-- Start of Tab Content Wrapper -->
+                    <div class="row tab-content custom-tabs">
+                        <%- include('./partials/perfil/comprasRealizadas') %>
+                    </div>  
+                    <!-- End of Tab Content Wrapper -->
+
+
+                </div>
+            </div>
+    </section>
+
+
+<%- include('./partials/footer') %>
